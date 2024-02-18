@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const MorseForm = () => {
 
@@ -6,21 +6,53 @@ const MorseForm = () => {
 
     const [regularInput, setRegularInput] = useState("");
     const [morseResult, setMorseResult] = useState("");
+    const [translations, setTranslations] = useState(null);
+
+    useEffect(() => {
+
+        async function fetchData() {
+            const response = await fetch("/translations")
+            if(!response.ok) {
+                throw new Error("Error occurred fetching translations");
+            }
+
+            const data = await response.json()
+            setTranslations(data.results)
+        }
+
+        fetchData()
+    });
 
     const handleFormSubmit = async (e) => {
         e.preventDefault();
-
-        const url = `https://api.funtranslations.com/translate/morse.json?text=${regularInput}`;
-        const response = await fetch(url);
-
-        if(!response.ok) {
-            throw new Error("Error occurred fetching morse translation");
+    
+        try {
+            const url = `https://api.funtranslations.com/translate/morse.json?text=${regularInput}`;
+            const response = await fetch(url);
+    
+            if (!response.ok) {
+                throw new Error("Error occurred fetching morse translation");
+            }
+    
+            const data = await response.json();
+            const translation = data.contents.translated;
+            setMorseResult(translation);
+    
+            await fetch("/translation/add", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                mode: "cors",
+                body: JSON.stringify({
+                    regular: regularInput,
+                    morse: translation, // Use the translation directly
+                }),
+            });
+        } catch (error) {
+            console.error("Error submitting form:", error);
         }
-
-        const data = await response.json()
-        const translation = data.contents.translated;
-        setMorseResult(translation);
-    }
+    };
 
     return (  
         <form onSubmit={handleFormSubmit}>
@@ -46,6 +78,16 @@ const MorseForm = () => {
                 />
             </div>
             <button>Translate</button>
+            <div id="translations">
+                <h2>Previous Translations</h2>
+                {translations &&
+                    translations.map((translation, index) => (
+                        <p key={index}>
+                            {translation.regular} | {translation.translation}
+                        </p>
+                    ))
+                }
+            </div>
         </form>
     );
 }
