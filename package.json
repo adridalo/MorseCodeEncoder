@@ -1,0 +1,19 @@
+{
+  "name": "morsecodeencoder",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build": "cd client && npm i && npm run build && cd ../server && npm i && npm run build",
+    "start": "cd server && node app.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^16.4.4",
+    "express": "^4.18.2",
+    "mongodb": "^6.3.0",
+    "nodemon": "^3.0.3"
+  }
+}
