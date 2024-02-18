@@ -49,6 +49,7 @@ const MorseForm = () => {
                 }),
             });
 
+            await fetchData()
             setRegularInput("")
             setMorseResult("")
         } catch (error) {
@@ -81,7 +82,7 @@ const MorseForm = () => {
             </div>
             <button>Translate</button>
             <div id="translations">
-                <h2>Previous Translations</h2>
+                <h2 style={{ textDecoration: "underline" }}>Previous Translations</h2>
                 {translations &&
                     translations.map((translation, index) => (
                         <div key={index} className="translation">
