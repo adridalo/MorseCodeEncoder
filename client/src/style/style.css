@@ -61,3 +61,7 @@ button {
     justify-content: center;
     align-items: center;
 }
+
+.remove {
+    width: 50%;
+}

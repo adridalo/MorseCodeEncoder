@@ -1,12 +1,14 @@
 import { useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
 
 const MorseForm = () => {
-
-// endpoint: https://api.funtranslations.com/translate/morse.json?text=hello
 
     const [regularInput, setRegularInput] = useState("");
     const [morseResult, setMorseResult] = useState("");
     const [translations, setTranslations] = useState(null);
+
+  const [t, i18n] = useTranslation("global")
+
 
     async function fetchData() {
         const response = await fetch("/translations")
@@ -60,7 +62,7 @@ const MorseForm = () => {
     return (  
         <form onSubmit={handleFormSubmit}>
             <div className="input">
-                <label htmlFor="reg-input">Regular Text</label>
+                <label htmlFor="reg-input">{t('regularInput.label')}</label>
                 <input 
                     type="text" 
                     name="reg-input" 
@@ -71,7 +73,7 @@ const MorseForm = () => {
                 />
             </div>
             <div className="input">
-                <label htmlFor="morse-result">Morse Code Translation</label>
+                <label htmlFor="morse-result">{t('morseInput.label')}</label>
                 <input 
                     type="text" 
                     name="morse-result" 
@@ -80,16 +82,16 @@ const MorseForm = () => {
                     disabled={true}
                 />
             </div>
-            <button>Translate</button>
+            <button>{t('buttons.translate')}</button>
             <div id="translations">
-                <h2 style={{ textDecoration: "underline" }}>Previous Translations</h2>
+                <h2 style={{ textDecoration: "underline" }}>{t('text.previous')}</h2>
                 {translations &&
                     translations.map((translation, index) => (
                         <div key={index} className="translation">
                             <p key={index}>
                                 {translation.regular} | {translation.translation}
                             </p>
-                            <button onClick={async e => {
+                            <button className="remove" onClick={async e => {
                                 e.preventDefault()
 
                                 try {
@@ -106,7 +108,7 @@ const MorseForm = () => {
                                 } catch(error) {
                                     console.error("Error removing translation: ", error)
                                 }
-                            }}>Remove</button>
+                            }}>{t('buttons.remove')}</button>
                         </div>
                     ))
                 }
