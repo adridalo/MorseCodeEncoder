@@ -8,4 +8,4 @@
 
 Application also features multi-language support!
 
-![Application](https://github.com/adridalo/MorseCodeEncoder/assets/93151842/a220178a-9966-4ffe-aaed-02bc1c6bc99d)
+![Application](https://github.com/adridalo/MorseCodeEncoder/assets/93151842/087a6402-3d73-40ee-b057-ab01cde68ea5)
