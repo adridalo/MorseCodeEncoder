@@ -6,4 +6,6 @@
 - Back-end is created through an [Express](https://expressjs.com/) server running the application.
 - Entire application is developed in a [Node.js](https://nodejs.org/) environment.
 
+Application also features multi-language support!
+
 ![Application](https://github.com/adridalo/MorseCodeEncoder/assets/93151842/a220178a-9966-4ffe-aaed-02bc1c6bc99d)
