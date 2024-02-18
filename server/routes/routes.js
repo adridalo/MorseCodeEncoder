@@ -29,6 +29,31 @@ router.post('/translation/add', async (req, res) => {
     })
 });
 
+router.delete('/translation/delete', async (req, res) => {
+    const id = req.body.id
+
+    try {
+        const result = await db.deleteData(id)
+        if(result.deletedCount === 1) {
+            res.status(200).send({
+                status: 200,
+                message: "Translation successfully deleted!"
+            })
+        } else {
+            res.status(404).send({
+                status: 404,
+                message: "Translation not found!"
+            })
+        }
+    } catch(error) {
+        console.error("Error deleting translation:", error)
+        res.status(500).send({
+            status: 500,
+            message: "Error occurred deleting translation!"
+        })
+    }
+})
+
 module.exports = {
     router
 }

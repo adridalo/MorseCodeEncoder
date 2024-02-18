@@ -1,5 +1,5 @@
 require('dotenv').config();
-const { MongoClient } = require('mongodb');
+const { MongoClient, ObjectId } = require('mongodb');
 const dbUrl = process.env.DB_URL;
 
 let instance = null;
@@ -32,6 +32,10 @@ class DB {
 
   async insertData(data) {
     return await instance.collection.insertMany(data);
+  }
+
+  async deleteData(id) {
+    return await instance.collection.deleteOne({ _id: new ObjectId(id) })
   }
 
   async getTranslations() {

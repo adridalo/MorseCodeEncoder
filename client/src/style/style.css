@@ -55,3 +55,9 @@ button {
     font-family: "Kode Mono", monospace;
     text-decoration: underline;
 }
+
+.translation {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

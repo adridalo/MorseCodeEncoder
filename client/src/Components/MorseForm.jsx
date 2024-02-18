@@ -8,20 +8,19 @@ const MorseForm = () => {
     const [morseResult, setMorseResult] = useState("");
     const [translations, setTranslations] = useState(null);
 
-    useEffect(() => {
-
-        async function fetchData() {
-            const response = await fetch("/translations")
-            if(!response.ok) {
-                throw new Error("Error occurred fetching translations");
-            }
-
-            const data = await response.json()
-            setTranslations(data.results)
+    async function fetchData() {
+        const response = await fetch("/translations")
+        if(!response.ok) {
+            throw new Error("Error occurred fetching translations");
         }
 
+        const data = await response.json()
+        setTranslations(data.results)
+    }
+
+    useEffect(() => {
         fetchData()
-    });
+    }, []);
 
     const handleFormSubmit = async (e) => {
         e.preventDefault();
@@ -49,6 +48,9 @@ const MorseForm = () => {
                     morse: translation, // Use the translation directly
                 }),
             });
+
+            setRegularInput("")
+            setMorseResult("")
         } catch (error) {
             console.error("Error submitting form:", error);
         }
@@ -82,9 +84,29 @@ const MorseForm = () => {
                 <h2>Previous Translations</h2>
                 {translations &&
                     translations.map((translation, index) => (
-                        <p key={index}>
-                            {translation.regular} | {translation.translation}
-                        </p>
+                        <div key={index} className="translation">
+                            <p key={index}>
+                                {translation.regular} | {translation.translation}
+                            </p>
+                            <button onClick={async e => {
+                                e.preventDefault()
+
+                                try {
+                                    await fetch('/translation/delete', {
+                                        method: "DELETE",
+                                        headers: {
+                                            "Content-Type": "application/json"
+                                        },
+                                        mode: "cors",
+                                        body: JSON.stringify({ id: translation._id })
+                                    })
+
+                                    await fetchData()
+                                } catch(error) {
+                                    console.error("Error removing translation: ", error)
+                                }
+                            }}>Remove</button>
+                        </div>
                     ))
                 }
             </div>
