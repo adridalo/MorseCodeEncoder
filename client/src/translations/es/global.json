@@ -1,0 +1,21 @@
+{
+    "title": {
+        "value": "Codificador de Código Morse"
+    },
+
+    "regularInput": {
+        "label": "Texto Normal"
+    },
+    "morseInput": {
+        "label": "Traducción a Código Morse"
+    },
+
+    "text": {
+        "previous": "Traducciones Anteriores"
+    },
+
+    "buttons": {
+        "translate": "Traducir",
+        "remove": "Eliminar"
+    }
+}

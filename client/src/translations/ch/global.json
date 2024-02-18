@@ -1,0 +1,21 @@
+{
+    "title": {
+        "value": "摩尔斯电码编码器"
+    },
+
+    "regularInput": {
+        "label": "常规文本"
+    },
+    "morseInput": {
+        "label": "摩尔斯电码翻译"
+    },
+
+    "text": {
+        "previous": "先前的翻译"
+    },
+
+    "buttons": {
+        "translate": "翻译",
+        "remove": "移除"
+    }
+}

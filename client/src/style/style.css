@@ -65,3 +65,7 @@ button {
 .remove {
     width: 50%;
 }
+
+#languages button {
+    width: fit-content;
+}

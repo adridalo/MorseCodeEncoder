@@ -1,0 +1,21 @@
+{
+    "title": {
+        "value": "モールス符号エンコーダー"
+    },
+
+    "regularInput": {
+        "label": "通常のテキスト"
+    },
+    "morseInput": {
+        "label": "モールス符号の翻訳"
+    },
+
+    "text": {
+        "previous": "以前の翻訳"
+    },
+
+    "buttons": {
+        "translate": "翻訳",
+        "remove": "削除"
+    }
+}
