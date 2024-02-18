@@ -1,0 +1,21 @@
+{
+    "title": {
+        "value": "Morse Code Encoder"
+    },
+
+    "regularInput": {
+        "label": "Regular Text"
+    },
+    "morseInput": {
+        "label": "Morse Code Translation"
+    },
+
+    "text": {
+        "previous": "Previous Translations"
+    },
+
+    "buttons": {
+        "translate": "Translate",
+        "remove": "Remove"
+    }
+}
